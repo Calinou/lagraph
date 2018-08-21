@@ -9,6 +9,9 @@ repository = "https://github.com/Calinou/lagraph"
 categories = ["command-line-interface"]
 readme = "README.md"
 
+[profile.release]
+lto = true
+
 [dependencies]
 ansi_term = "0.11.0"
 chrono = "0.4.5"

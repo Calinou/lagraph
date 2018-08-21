@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Release binaries are now built with link-time optimization enabled,
+  resulting in smaller file sizes.
+
 ## 0.1.0 - 2018-08-21
 
 - Initial versioned release.
