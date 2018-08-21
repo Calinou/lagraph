@@ -1,0 +1,19 @@
+[package]
+name = "lagraph"
+version = "0.1.0"
+description = "Display a ping graph in a terminal"
+authors = ["Hugo Locurcio <hugo.locurcio@hugo.pro>"]
+license = "MIT/Apache-2.0"
+keywords = ["ping", "latency", "network", "graph", "cli"]
+repository = "https://github.com/Calinou/lagraph"
+categories = ["command-line-interface"]
+readme = "README.md"
+
+[dependencies]
+ansi_term = "0.11.0"
+chrono = "0.4.5"
+terminal_size = "0.1.8"
+
+[dependencies.clap]
+version = "2.32.0"
+features = ["yaml"]

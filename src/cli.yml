@@ -1,0 +1,60 @@
+name: lagraph
+version: "0.1.0"
+about: Display a ping graph in a terminal
+args:
+    - host:
+        help: The host to ping (required)
+        index: 1
+        required: true
+    - count:
+        short: c
+        long: count
+        help: Number of pings to do (default is 0 / unlimited)
+        takes_value: true
+    - no_header:
+        short: H
+        long: no-header
+        help: Don't print the header
+    - interval:
+        short: i
+        long: interval
+        help: Sets interval between pings (in seconds, use . as decimal separator)
+        takes_value: true
+    - max_ping:
+        short: M
+        long: max-ping
+        help: The maximal visible ping value on the graph (in milliseconds)
+        takes_value: true
+    - timestamp:
+        short: t
+        long: timestamp
+        help: Prints a timestamp
+        takes_value: true
+        possible_values:
+            - none
+            - short
+            - full
+    - color:
+        short: C
+        long: color
+        help: The color scheme to use (default varies depending on operating system)
+        takes_value: true
+        possible_values:
+            - none
+            - 16color
+            - truecolor
+    - saturation:
+        short: S
+        long: saturation
+        help: The saturation of the graph results (0-255, default is 160)
+        takes_value: true
+    - style:
+        short: s
+        long: style
+        help: Changes the bar style (default is "bar")
+        takes_value: true
+        possible_values:
+            - bar
+            - block
+            - line
+            - ascii
