@@ -1,5 +1,7 @@
 # lagraph
 
+[![Crates.io](https://img.shields.io/crates/v/lagraph.svg)](https://crates.io/crates/lagraph)
+
 **lagraph** is a command-line utility that can be used to draw a ping graph over time.
 
 **Note that Windows is not supported yet.**
