@@ -2,6 +2,8 @@
 
 **lagraph** is a command-line utility that can be used to draw a ping graph over time.
 
+**Note that Windows is not supported yet.**
+
 ## Features
 
 - Bars drawn using Unicode or ASCII character, supporting "half characters"
