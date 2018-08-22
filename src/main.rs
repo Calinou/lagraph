@@ -15,7 +15,7 @@ use ansi_term::{ANSIString, ANSIStrings};
 use chrono::prelude::*;
 use clap::App;
 use std::process::Command;
-use std::{cmp, thread, time};
+use std::{cmp, env, thread, time};
 use terminal_size::{terminal_size, Width};
 
 fn main() {
@@ -83,17 +83,16 @@ fn main() {
     // - `256color` is more compatible but not as accurate
     // - `16color` is the most compatible along with `none` (disabled colors)
     // The default value varies depending on the environment variable COLORTERM
-    let colorterm = option_env!("COLORTERM");
     let color_default;
-    match colorterm {
-        Some(x) => {
-            if x == "truecolor" || x == "24bit" {
+    match env::var("COLORTERM") {
+        Ok(value) => {
+            if value == "truecolor" || value == "24bit" {
                 color_default = "truecolor";
             } else {
                 color_default = "16color";
             }
         }
-        None => {
+        Err(_) => {
             color_default = "16color";
         }
     }
@@ -135,9 +134,9 @@ fn main() {
         };
 
         // Call the system `ping` command
-        // TODO: Support the Windows `ping` command output
+        // Windows uses "-n" to set the ping count, UNIX-like platforms use "-c"
         let output = Command::new("ping")
-            .arg("-c")
+            .arg(if cfg!(windows) { "-n" } else { "-c" })
             .arg("1")
             .arg(host.to_string())
             .output();
@@ -153,13 +152,16 @@ fn main() {
             let output_string = String::from_utf8_lossy(&op);
 
             // Trim the output to keep only a string containing the ping value
+            // There is a space before "ms" on Linux and macOS but not on Windows,
+            // so it must be trimmed
             let ping_string = output_string
                 .split(" time=")
                 .last()
                 .unwrap()
-                .split(" ms")
+                .split("ms")
                 .nth(0)
-                .unwrap();
+                .unwrap()
+                .trim();
 
             // Convert string to floating-point number
             ping = ping_string.parse().unwrap();
