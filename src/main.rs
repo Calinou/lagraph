@@ -83,19 +83,18 @@ fn main() {
     // - `256color` is more compatible but not as accurate
     // - `16color` is the most compatible along with `none` (disabled colors)
     // The default value varies depending on the environment variable COLORTERM
-    let color_default;
-    match env::var("COLORTERM") {
+    let color_default = match env::var("COLORTERM") {
         Ok(value) => {
             if value == "truecolor" || value == "24bit" {
-                color_default = "truecolor";
+                "truecolor"
             } else {
-                color_default = "16color";
+                "16color"
             }
         }
         Err(_) => {
-            color_default = "16color";
+            "16color"
         }
-    }
+    };
 
     let color = value_t!(matches, "color", String).unwrap_or(String::from(color_default));
 
@@ -251,22 +250,21 @@ fn main() {
             let now = Local::now();
             let timestamp_setting =
                 value_t!(matches, "timestamp", String).unwrap_or(String::from("none"));
-            let timestamp;
-            match timestamp_setting.as_ref() {
+            let timestamp = match timestamp_setting.as_ref() {
                 "short" => {
                     // Only hours, minutes and seconds
-                    timestamp = now.format("%H:%M:%S").to_string();
+                    now.format("%H:%M:%S").to_string()
                 }
                 "full" => {
                     // Full date in a SQL-like format
-                    timestamp = now.format("%Y-%m-%d %H:%M:%S").to_string();
+                    now.format("%Y-%m-%d %H:%M:%S").to_string()
                 }
                 _ => {
                     // This also matches the default "none" setting
                     // No timestamp
-                    timestamp = String::from("");
+                    String::from("")
                 }
-            }
+            };
 
             // Print the ping graph (and cap if needed to avoid line breaks)
             println!(
