@@ -28,6 +28,59 @@ If you already have [Rust](https://rust-lang.org/) installed, you can use
 cargo install lagraph
 ```
 
+## Usage
+
+Use `lagraph --help` for a full list of command-line options.
+
+### Examples
+
+Ping an host at the default interval (0.5 seconds):
+
+```bash
+lagraph <host>
+```
+
+Ping an host every 5 seconds, displaying a short timestamp on the left:
+
+```bash
+lagraph -i 5 -t short <host>
+```
+
+Ping an host with a maximum displayable ping value of 100 milliseconds
+and remove colors from the output:
+
+```bash
+lagraph -M 100 -C none <host>
+```
+
+### Setting true-color output by default
+
+To use true-color output by default, you need to set the environment variable
+`COLORTERM` to `truecolor`. You can make this permanent by adding the following
+line to your shell startup file (such as `~/.bashrc` or `~/.zshrc`):
+
+```bash
+export COLORTERM="truecolor"
+```
+
+On Windows, this can be done using the following commands depending on
+your shell:
+
+```bat
+:: cmd.exe (Batch)
+set COLORTERM=truecolor
+```
+
+```powershell
+# PowerShell
+$env:COLORTERM="truecolor"
+```
+
+Note that not all terminals support true-color terminal output; see
+[this gist](https://gist.github.com/XVilka/8346728) for more information.
+Windows 10 supports true-color terminal output since the Creators Update
+(version 1703).
+
 ## License
 
 Copyright © 2018 Hugo Locurcio and contributors
