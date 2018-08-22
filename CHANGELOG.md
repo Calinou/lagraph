@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Release binaries are now built with link-time optimization enabled,
   resulting in smaller file sizes.
 
+### Fixed
+
+- The `COLORTERM` environment variable is now properly taken into account
+  at run-time.
+
 ## 0.1.0 - 2018-08-21
 
 - Initial versioned release.
