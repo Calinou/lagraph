@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Windows support.
+- Binary releases compiled using [trust](https://github.com/japaric/trust)
+  are now available on the Releases page.
 
 ### Changed
 
