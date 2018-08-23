@@ -1,6 +1,6 @@
 [package]
 name = "lagraph"
-version = "0.1.0"
+version = "0.2.0"
 description = "Display a ping graph in a terminal"
 authors = ["Hugo Locurcio <hugo.locurcio@hugo.pro>"]
 license = "MIT/Apache-2.0"
