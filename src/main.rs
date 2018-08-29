@@ -91,9 +91,7 @@ fn main() {
                 "16color"
             }
         }
-        Err(_) => {
-            "16color"
-        }
+        Err(_) => "16color",
     };
 
     let color = value_t!(matches, "color", String).unwrap_or(String::from(color_default));
@@ -123,11 +121,13 @@ fn main() {
     }
 
     loop {
-        // Get the terminal width
-        // This is done every iteration so that the ping graph adapts to terminal resizes
+        // Get the terminal width every iteration so that the ping graph
+        // adapts to terminal resizes
         let size = terminal_size();
         let width = if let Some((Width(w), _)) = size {
-            w as u32 - 10
+            // The left column's typical width is substracted to the total width
+            // FIXME: Take the timestamp into account if present
+            w as u32 - 12
         } else {
             80
         };
@@ -268,11 +268,14 @@ fn main() {
 
             // Print the ping graph (and cap if needed to avoid line breaks)
             println!(
-                "{} {}\t{}{}",
+                "{} {}  {} {}",
                 // The optional timestamp
                 timestamp,
-                // The ping value with " ms" suffix
-                ping_color.paint([(ping as u32).to_string(), "ms".to_string()].join(" ")),
+                // The ping value with a " ms" suffix (right-aligned)
+                ping_color.paint(format!(
+                    "{:>7}",
+                    [(ping as u32).to_string(), "ms".to_string()].join(" ")
+                )),
                 // The separator character (depends on style)
                 separator,
                 // The bar
