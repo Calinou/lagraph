@@ -1,6 +1,6 @@
 [package]
 name = "lagraph"
-version = "0.2.0"
+version = "0.2.1"
 description = "Display a ping graph in a terminal"
 authors = ["Hugo Locurcio <hugo.locurcio@hugo.pro>"]
 license = "MIT/Apache-2.0"
@@ -14,7 +14,7 @@ lto = true
 
 [dependencies]
 ansi_term = "0.11.0"
-chrono = "0.4.5"
+chrono = "0.4.6"
 terminal_size = "0.1.8"
 
 [dependencies.clap]
