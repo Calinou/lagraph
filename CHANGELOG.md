@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- The ping value is now right-aligned.
+
+### Fixed
+
+- `ping` command output is now correctly parsed on Windows in languages
+  other than English.
+
 ## [0.2.0] - 2018-08-23
 
 ### Added

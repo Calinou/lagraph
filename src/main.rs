@@ -138,23 +138,26 @@ fn main() {
             .arg(if cfg!(windows) { "-n" } else { "-c" })
             .arg("1")
             .arg(host.to_string())
-            .output();
+            .output()
+            .unwrap();
 
-        let op_unwrap = output.unwrap();
-        let status = op_unwrap.status;
+        let status = output.status;
         // Default to 0 ping in case of errors (for the wait time to make sense)
         let mut ping = 0.0;
 
         if status.success() {
             // Ping successful
-            let op = op_unwrap.stdout;
-            let output_string = String::from_utf8_lossy(&op);
+            let output_string = String::from_utf8_lossy(&output.stdout);
 
             // Trim the output to keep only a string containing the ping value
-            // There is a space before "ms" on Linux and macOS but not on Windows,
-            // so it must be trimmed
+            // The output line is the 2nd one on Linux and macOS and the 3rd one on Windows
+            // There is a space before "ms" on Linux and macOS but not on Windows
+            // (in some languages such as English), so it must be trimmed
             let ping_string = output_string
-                .split(" time=")
+                .split("\n")
+                .nth(if cfg!(windows) { 2 } else { 1 })
+                .unwrap()
+                .split("=")
                 .last()
                 .unwrap()
                 .split("ms")
@@ -283,7 +286,7 @@ fn main() {
             );
         } else {
             // Ping failed
-            let err = op_unwrap.stderr;
+            let err = output.stderr;
             println!("{}", Red.bold().paint(String::from_utf8_lossy(&err)));
         }
 
