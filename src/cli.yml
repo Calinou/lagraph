@@ -9,7 +9,7 @@ args:
     - count:
         short: c
         long: count
-        help: Number of pings to do (default is 0 / unlimited)
+        help: Number of pings to perform (default is 0 / unlimited)
         takes_value: true
     - no_header:
         short: H
@@ -18,17 +18,17 @@ args:
     - interval:
         short: i
         long: interval
-        help: Sets interval between pings (in seconds, use . as decimal separator)
+        help: Interval between pings (in seconds, use . as decimal separator)
         takes_value: true
     - max_ping:
         short: M
         long: max-ping
-        help: The maximal visible ping value on the graph (in milliseconds)
+        help: Maximal visible ping value on the graph (in milliseconds)
         takes_value: true
     - timestamp:
         short: t
         long: timestamp
-        help: Prints a timestamp
+        help: Print a timestamp
         takes_value: true
         possible_values:
             - none
@@ -37,7 +37,7 @@ args:
     - color:
         short: C
         long: color
-        help: The color scheme to use (default varies depending on operating system)
+        help: Color scheme to use (default is "16color" unless $COLORTERM is "truecolor")
         takes_value: true
         possible_values:
             - none
@@ -46,12 +46,12 @@ args:
     - saturation:
         short: S
         long: saturation
-        help: The saturation of the graph results (0-255, default is 160)
+        help: Saturation of the graph results (0-255, default is 160)
         takes_value: true
     - style:
         short: s
         long: style
-        help: Changes the bar style (default is "bar")
+        help: Bar style to use (default is "bar")
         takes_value: true
         possible_values:
             - bar
