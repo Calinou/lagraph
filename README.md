@@ -63,17 +63,13 @@ line to your shell startup file (such as `~/.bashrc` or `~/.zshrc`):
 export COLORTERM="truecolor"
 ```
 
-On Windows, this can be done using the following commands depending on
-your shell:
+On Windows, this can be done using the following commands in a Command Prompt:
 
 ```bat
-:: cmd.exe (Batch)
+:: Permanently set COLORTERM to "truecolor" for the current user
+setx COLORTERM truecolor
+:: Sets the variable in the current shell
 set COLORTERM=truecolor
-```
-
-```powershell
-# PowerShell
-$env:COLORTERM="truecolor"
 ```
 
 Note that not all terminals support true-color terminal output; see
