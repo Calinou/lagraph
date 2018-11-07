@@ -6,14 +6,13 @@
 
 extern crate ansi_term;
 extern crate chrono;
-#[macro_use]
 extern crate clap;
 extern crate terminal_size;
 use ansi_term::Colour::{Blue, Green, Red, Yellow, RGB};
 use ansi_term::Style;
 use ansi_term::{ANSIString, ANSIStrings};
 use chrono::prelude::*;
-use clap::App;
+use clap::{load_yaml, value_t, value_t_or_exit, App};
 use std::process::Command;
 use std::{cmp, env, thread, time};
 use terminal_size::{terminal_size, Width};
