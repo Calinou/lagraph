@@ -5,6 +5,7 @@ dist: trusty
 language: rust
 services: docker
 sudo: required
+osx_image: xcode10.1
 
 env:
   global:
