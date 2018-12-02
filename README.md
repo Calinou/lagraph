@@ -28,6 +28,8 @@ If you already have [Rust](https://rust-lang.org/) installed, you can use
 cargo install lagraph
 ```
 
+You need rustc 1.30 or later to build lagraph from source.
+
 ## Usage
 
 Use `lagraph --help` for a full list of command-line options.
