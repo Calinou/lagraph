@@ -245,7 +245,7 @@ fn main() {
                 bar_character.repeat(cmp::min(number_of_bars, width as usize)),
                 cap.to_string(),
             ]
-                .join("");
+            .join("");
 
             // Timestamp
 
@@ -292,11 +292,11 @@ fn main() {
         // Decrement the ping counter if a ping count was specified
         if finite {
             count -= 1;
-        }
 
-        // Exit if the limit of pings has been reached
-        if finite && count == 0 {
-            break;
+            // Exit if the limit of pings has been reached
+            if count == 0 {
+                break;
+            }
         }
 
         // Sleep after receiving the ping result or an error
