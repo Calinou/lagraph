@@ -44,11 +44,8 @@ fn main() {
     // Number of pings to do (0 = no limit, which is the default)
     let mut count = value_t!(matches, "count", u32).unwrap_or(0);
 
-    // Used to break out of the loop if needed
-    let finite = if count != 0 { true } else { false };
-
     // Default style is "bar"
-    let style = value_t!(matches, "style", String).unwrap_or(String::from("bar"));
+    let style = value_t!(matches, "style", String).unwrap_or_else(|_| String::from("bar"));
 
     // All available bar styles (not all of them support half-caps)
     // If half-caps are not supported, then the half cap is just an empty string
@@ -93,7 +90,7 @@ fn main() {
         Err(_) => "16color",
     };
 
-    let color = value_t!(matches, "color", String).unwrap_or(String::from(color_default));
+    let color = value_t!(matches, "color", String).unwrap_or_else(|_| String::from(color_default));
 
     // Whether to print a header or not (default: print header)
     let print_header = !matches.is_present("no_header");
@@ -126,7 +123,7 @@ fn main() {
         let width = if let Some((Width(w), _)) = size {
             // The left column's typical width is substracted to the total width
             // FIXME: Take the timestamp into account if present
-            w as u32 - 12
+            u32::from(w) - 12
         } else {
             80
         };
@@ -153,10 +150,10 @@ fn main() {
             // There is a space before "ms" on Linux and macOS but not on Windows
             // (in some languages such as English), so it must be trimmed
             let ping_string = output_string
-                .split("\n")
+                .split('\n')
                 .nth(if cfg!(windows) { 2 } else { 1 })
                 .unwrap()
-                .split("=")
+                .split('=')
                 .last()
                 .unwrap()
                 .split("ms")
@@ -184,22 +181,16 @@ fn main() {
             // Don't draw caps if user has turned them off or there is no need
             // (in case there is sub-millisecond precision thanks to large terminal width)
             // (or if the bar has overflowed)
-            let draw_cap;
-            if max_ping <= width || number_of_bars >= (width) as usize {
-                draw_cap = false;
-            } else {
-                draw_cap = true;
-            }
+            let draw_cap = !(max_ping <= width || number_of_bars >= (width) as usize);
 
-            let cap;
             // Draw a cap for sub-character precision
-            if draw_cap && ping >= bar_ping_half && ping < bar_ping_next {
+            let cap = if draw_cap && ping >= bar_ping_half && ping < bar_ping_next {
                 // There should be a cap
-                cap = cap_half_character;
+                cap_half_character
             } else {
                 // There shouldn't be a cap ("empty" cap)
-                cap = "";
-            }
+                ""
+            };
 
             // Ping bar/number color
             let ping_color;
@@ -211,7 +202,7 @@ fn main() {
 
                     // No red at 0% bar width, fully red at 100% bar width
                     let red = cmp::min(
-                        (255.0 + (512.0 - 2.0 * desaturation as f32) * (ratio - 0.5)) as i16,
+                        (255.0 + (512.0 - 2.0 * f32::from(desaturation)) * (ratio - 0.5)) as i16,
                         255 as i16,
                     ) as u8;
 
@@ -219,8 +210,9 @@ fn main() {
                     let green = cmp::min(
                         255,
                         cmp::max(
-                            (255.0 - (512.0 - desaturation as f32 * 2.0) * (ratio - 0.5)) as i16,
-                            desaturation as i16,
+                            (255.0 - (512.0 - f32::from(desaturation) * 2.0) * (ratio - 0.5))
+                                as i16,
+                            i16::from(desaturation),
                         ),
                     ) as u8;
 
@@ -241,7 +233,7 @@ fn main() {
             }
 
             // String containing the whole bar (including the cap)
-            let bar = [
+            let bar_string = [
                 bar_character.repeat(cmp::min(number_of_bars, width as usize)),
                 cap.to_string(),
             ]
@@ -251,7 +243,7 @@ fn main() {
 
             let now = Local::now();
             let timestamp_setting =
-                value_t!(matches, "timestamp", String).unwrap_or(String::from("none"));
+                value_t!(matches, "timestamp", String).unwrap_or_else(|_| String::from("none"));
             let timestamp = match timestamp_setting.as_ref() {
                 "short" => {
                     // Only hours, minutes and seconds
@@ -281,7 +273,7 @@ fn main() {
                 // The separator character (depends on style)
                 separator,
                 // The bar
-                ping_color.paint(bar)
+                ping_color.paint(bar_string)
             );
         } else {
             // Ping failed
@@ -289,8 +281,7 @@ fn main() {
             println!("{}", Red.bold().paint(String::from_utf8_lossy(&err)));
         }
 
-        // Decrement the ping counter if a ping count was specified
-        if finite {
+        if count != 0 {
             count -= 1;
 
             // Exit if the limit of pings has been reached
