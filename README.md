@@ -81,7 +81,7 @@ Windows 10 supports true-color terminal output since the Creators Update
 
 ## License
 
-Copyright © 2018 Hugo Locurcio and contributors
+Copyright © 2018-2019 Hugo Locurcio and contributors
 
 Licensed (at your option) under the [MIT](/LICENSE.MIT.md)
 or [Apache 2.0](LICENSE.Apache-2.0.txt) license.

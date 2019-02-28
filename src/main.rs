@@ -1,6 +1,6 @@
 // lagraph: Display a ping graph in a terminal
 //
-// Copyright © 2018 Hugo Locurcio and contributors
+// Copyright © 2018-2019 Hugo Locurcio and contributors
 // Licensed (at your option) under the MIT or Apache 2 license,
 // see `LICENSE.MIT.md` and `LICENSE.Apache-2.0.txt` for details.
 
