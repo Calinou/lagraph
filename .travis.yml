@@ -86,8 +86,10 @@ before_install:
 install:
   - sh ci/install.sh
   - source ~/.cargo/env || true
+  - rustup component add rustfmt
 
 script:
+  - cargo fmt --all -- --check --color always
   - bash ci/script.sh
 
 after_script: set +e
