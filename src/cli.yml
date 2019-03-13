@@ -6,25 +6,30 @@ args:
         help: The host to ping (required)
         index: 1
         required: true
+
     - count:
         short: c
         long: count
         help: Number of pings to perform (default is 0 / unlimited)
         takes_value: true
+
     - no_header:
         short: H
         long: no-header
         help: Don't print the header
+
     - interval:
         short: i
         long: interval
         help: Interval between pings (in seconds, use . as decimal separator)
         takes_value: true
+
     - max_ping:
         short: M
         long: max-ping
         help: Maximal visible ping value on the graph (in milliseconds)
         takes_value: true
+
     - timestamp:
         short: t
         long: timestamp
@@ -34,6 +39,7 @@ args:
             - none
             - short
             - full
+
     - color:
         short: C
         long: color
@@ -43,11 +49,13 @@ args:
             - none
             - 16color
             - truecolor
+
     - saturation:
         short: S
         long: saturation
         help: Saturation of the graph results (0-255, default is 160)
         takes_value: true
+
     - style:
         short: s
         long: style
