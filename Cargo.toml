@@ -8,6 +8,7 @@ keywords = ["ping", "latency", "network", "graph", "cli"]
 repository = "https://github.com/Calinou/lagraph"
 categories = ["command-line-interface"]
 readme = "README.md"
+edition = "2018"
 
 [profile.release]
 lto = true
