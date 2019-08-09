@@ -10,6 +10,13 @@ categories = ["command-line-interface"]
 readme = "README.md"
 edition = "2018"
 
+[badges]
+appveyor = { repository = "https://github.com/Calinou/lagraph" }
+travis-ci = { repository = "Calinou/lagraph" }
+is-it-maintained-issue-resolution = { repository = "https://github.com/Calinou/lagraph" }
+is-it-maintained-open-issues = { repository = "https://github.com/Calinou/lagraph" }
+maintenance = { status = "passively-maintained" }
+
 [profile.release]
 lto = true
 
