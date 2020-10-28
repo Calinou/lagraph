@@ -1,8 +1,8 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v2.1.0
+    rev: v3.3.0
     hooks:
-      - id: check-yaml
+      - id: fix-byte-order-marker
       - id: end-of-file-fixer
       - id: trailing-whitespace
 
@@ -10,6 +10,6 @@ repos:
         args: [--fix=lf]
 
   - repo: https://github.com/doublify/pre-commit-rust
-    rev: 210883a5b8d7363d621230464cde19ef6fb463bf
+    rev: v1.0
     hooks:
       - id: fmt
