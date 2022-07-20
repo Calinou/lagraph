@@ -26,5 +26,5 @@ chrono = "0.4.19"
 terminal_size = "0.2.1"
 
 [dependencies.clap]
-version = "3.2.11"
+version = "3.2.13"
 features = ["yaml"]
