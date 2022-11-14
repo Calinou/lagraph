@@ -22,7 +22,7 @@ lto = true
 
 [dependencies]
 ansi_term = "0.12.1"
-chrono = "0.4.22"
+chrono = "0.4.23"
 terminal_size = "0.2.2"
 
 [dependencies.clap]
